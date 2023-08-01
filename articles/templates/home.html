@@ -1,0 +1,75 @@
+{% extends 'base.html' %} 
+{% block content %}
+<div class="'col-md-6 offset-md-3">
+  {% if user.is_authenticated %}
+   {% if user.is_superuser %} 
+   {% if users %} 
+  <div class="continer">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+             <th scope="col">is_author</th>
+            <th scope="col">is_publisher</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+            {% for user in users %}
+            {% if user.is_superuser %}
+            {% else %}
+          <tr>
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.is_author}}</td>
+            <td>{{user.is_publisher}}</td>
+            <td><a href="{% url 'delete_user' user.id %}"><button class="btn btn-danger">Delete</button></a></td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+
+        </tbody>
+      </table>
+  </div>
+  
+ 
+   {% else %}
+  <h1>No user ............</h1>
+  {% endif %} 
+  {%elif user.is_author%}
+  <h1>Articles</h1>
+  {%elif user.is_publisher%}
+  <h1>Publisher</h1>
+  {% endif %} 
+  {% else %}
+  <h1>Login</h1>
+  <form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="mb-3">
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        aria-describedby="emailHelp"
+        placeholder="username"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <input
+        type="password"
+        class="form-control"
+        name="password"
+        placeholder="password"
+        required
+      />
+    </div>
+    <button type="submit" class="btn btn-secondary">Login</button>
+  </form>
+  {% endif %}
+</div>
+
+{% endblock %}
