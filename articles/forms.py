@@ -67,20 +67,15 @@ class AddArticles(forms.ModelForm):
         ),
         label="",
     )
-    content = forms.CharField(
-        widget=forms.widgets.TextInput(
-            attrs={"placeholder": "content", "class": "form-control"}
-        ),
-        label="",
-    )
+    content = forms.CharField(widget=forms.Textarea) 
     thumbnail = forms.ImageField(
         widget=forms.widgets.FileInput(
-            attrs={"placeholder": "Image", "class": "form-control"}
+            attrs={"placeholder": "Image", "class": "form-control", "required": False}
         ),
-        label="",
+        label="",  
     )
-
+    
     class Meta:
         model = Articles
-        fields = "__all__"
-        exclude = ()
+        fields = ['title', 'subtitle', 'content', 'thumbnail']
+        exclude = ('author','publisher','status')

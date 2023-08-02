@@ -1,0 +1,10 @@
+{% extends 'base.html' %} 
+{% block content %}
+
+<form method="POST" action="{% url 'add_article' %}" enctype="multipart/form-data">
+  {% csrf_token %} 
+  {{form.as_p}}
+  <button class="btn btn-secondary">Add record</button>
+</form><br/>
+<a href="{% url 'home' %}"><button class="btn btn-secondary">Back</button></a>
+{% endblock %}
