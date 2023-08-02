@@ -116,10 +116,9 @@ def edit_article(request,pk):
         if current_record.status == "PUBLISHED":
             messages.success(request,"Published article cannot be edited")
             return redirect('home')
-        form = AddArticles(request.POST or request.FILES,instance=current_record)
+        form = AddArticles(request.POST  or None,instance=current_record)
         if form.is_valid():
-            editForm =form.save(commit=False)
-            editForm.save()
+            form.save()
             messages.success(request,"article updated")
             return redirect('home')
         return render(request,'edit_article.html',{'form':form})
