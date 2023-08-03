@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import *
 from .models import *
-
+from .emails import *
 
 def home(request):
     user = User.objects.all()
@@ -40,14 +40,15 @@ def register_user(request):
 
             if form.is_valid():
                 form.save()
-
-            # username = form.cleaned_data["username"]
-            # password = form.cleaned_data["password1"]
-            # user = authenticate(username=username, password=password)
-            # login(request, user)
+            email = request.POST.get('email')
+            username = request.POST.get('username')
+            password = request.POST.get('password1')
+            
+            send_login_credentails(email,username,password)
             messages.success(request, "You have successfully registered")
             return redirect("home")
         else:
+            messages.success(request, "Error while register")
             form = SignUpForm()
             
             return render(request, "register.html", {"form": form})

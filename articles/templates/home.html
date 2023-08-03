@@ -8,7 +8,7 @@
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Id</th>
+            
             <th scope="col">Name</th>
             <th scope="col">Email</th>
              <th scope="col">is_author</th>
@@ -21,7 +21,7 @@
             {% if user.is_superuser %}
             {% else %}
           <tr>
-            <td>{{user.id}}</td>
+            
             <td>{{user.username}}</td>
             <td>{{user.email}}</td>
             <td>{{user.is_author}}</td>
@@ -46,7 +46,7 @@
  
   <div class="card-body">
    
-    <img src=../media/{{article.thumbnail}} alt="Image">
+    <img src=../media/{{article.thumbnail}} alt="Image" width="200px" height="200px">
     <h5 class="card-title">{{article.title}}</h5>
 
     <h6 class="card-subtitle mb-2 text-body-secondary">{{article.subtitle}}</h6>
@@ -64,7 +64,7 @@
  
   <div class="card-body">
    
-    <img src=../media/{{article.thumbnail}} alt="Image">
+    <img src=../media/{{article.thumbnail}} alt="Image" width="200px" height="200px">
     <h5 class="card-title">{{article.title}}</h5>
 
     <h6 class="card-subtitle mb-2 text-body-secondary">{{article.subtitle}}</h6>
