@@ -30,7 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+PAGINATION_PER_PAGE = 1
 # Application definition
 
 INSTALLED_APPS = [

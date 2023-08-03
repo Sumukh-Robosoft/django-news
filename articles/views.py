@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 from django.contrib import messages
 from .forms import *
 from .models import *
@@ -8,6 +9,9 @@ from .emails import *
 def home(request):
     user = User.objects.all()
     articles = Articles.objects.all()
+    paginator = Paginator(articles, per_page=settings.PAGINATION_PER_PAGE)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, "home.html", {"articles": articles, "users": user})
 
 
@@ -105,6 +109,10 @@ def view_articles(request):
     return render(request, "articles.html", {"articles": articles})
 
 
+def get_profile(request):
+    profile = request.user.id
+    user = User.objects.get(id = profile)
+    return render(request,'profile.html',{"user":user})
 
 
     

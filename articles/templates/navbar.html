@@ -27,6 +27,7 @@
             <li class="nav-item">
             <a class="nav-link" href="{% url 'register' %}">Register</a>
             </li>
+            
             {% elif user.is_author %}
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'add_article' %}">Add Article</a>
@@ -35,12 +36,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'view_articles' %}">View Your Articles</a>
                     </li>
+                   
             {% elif user.is_publisher == True %}
-                
+            
             {% endif %}
+            
             <ul >
+              <li style="position: absolute; top: 0; right: 75px;">
+                <a class="nav-link" href="{% url 'profile' %}" > Profile</a> 
+            </li>
               <li style="position: absolute; top: 0; right: 0;">
-                <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+                
+                 
+                  <a class="nav-link " href="{% url 'logout' %}">Logout</a>
+                
+               
+                
               </li>
             </ul>
             

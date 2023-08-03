@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %} 
+<h1>Articles Add By You</h1>
 {% for article in articles %}
+<br>
+
+
 <div class="card">
   <div class="card-header">
     <h5 class="card-title">{{article.title}}</h5>
@@ -15,6 +19,5 @@
    </div>
 <br />
 {% endfor %}
-<a href="{% url 'home' %}"><button class="btn btn-secondary">Back</button></a>
 
 {% endblock %}

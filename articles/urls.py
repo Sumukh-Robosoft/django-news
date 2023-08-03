@@ -11,5 +11,6 @@ urlpatterns = [
     path('view-articles/',views.view_articles,name="view_articles"),
     path('article/<int:pk>',views.individual_article,name='article'),
     path('publish-article/<int:pk>',views.publish_article,name="publish"),
-    path("edit-article/<int:pk>",views.edit_article,name='edit_article')
+    path("edit-article/<int:pk>",views.edit_article,name='edit_article'),
+    path("profile/",views.get_profile,name="profile")
 ]
