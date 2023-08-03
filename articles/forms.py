@@ -67,7 +67,7 @@ class AddArticles(forms.ModelForm):
         ),
         label="",
     )
-    content = forms.CharField(widget=forms.Textarea) 
+    content = forms.CharField(widget=forms.Textarea(attrs={'rows': 20, 'cols': 170,"placeholder": "content"}),label="") 
     thumbnail = forms.ImageField(
         widget=forms.widgets.FileInput(
             attrs={"placeholder": "Image", "class": "form-control", "required": False}

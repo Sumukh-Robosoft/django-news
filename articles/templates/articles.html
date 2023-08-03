@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 {% block content %} 
 {% for article in articles %}
-<div class="card" style="width: 18rem">
-  <div class="card-body">
-    <img src="../media/{{article.thumbnail}}" alt="Image" width="200px" height="200px"/>
-    
+<div class="card">
+  <div class="card-header">
     <h5 class="card-title">{{article.title}}</h5>
-
-    <h6 class="card-subtitle mb-2 text-body-secondary">{{article.subtitle}}</h6>
-    <p class="card-text">{{article.content}}</p>
-    <p class="card-text">{{article.author}}</p>
+    <img src="../media/{{article.thumbnail}}" alt="Thumbanail" width="500px" height="200px">
+    
   </div>
-</div>
+  <div class="card-body">
+    <h5 class="card-title">{{article.subtitle}}</h5>
+    <p class="card-text">{{article.content}}</p><br>
+    <p class="card-text">Author - {{article.author}}</p>
+   </div>
+   </div>
 <br />
 {% endfor %}
 <a href="{% url 'home' %}"><button class="btn btn-secondary">Back</button></a>

@@ -1,10 +1,13 @@
 {% extends 'base.html' %} 
 {% block content %}
-
+<div class="container">
+<h1>Add Articles</h1>
 <form method="POST" action="{% url 'add_article' %}" enctype="multipart/form-data">
   {% csrf_token %} 
   {{form.as_p}}
-  <button class="btn btn-secondary">Add record</button>
-</form><br/>
-<a href="{% url 'home' %}"><button class="btn btn-secondary">Back</button></a>
+ 
+<button type="submit" class="btn btn-secondary">Add Article</button>
+<button class="btn btn-secondary"><a href="{% url 'home' %}" style="all: unset;">Back</a> </button>
+</form>
+</div>
 {% endblock %}
