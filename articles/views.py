@@ -40,19 +40,23 @@ def logout_user(request):
 def register_user(request):
     try:
         if request.method == "POST":
-            form = SignUpForm(request.POST)
+            form = SignUpForm(request.POST or None)
 
             if form.is_valid():
                 form.save()
-            email = request.POST.get('email')
-            username = request.POST.get('username')
-            password = request.POST.get('password1')
+                email = request.POST.get('email')
+                username = request.POST.get('username')
+                password = request.POST.get('password1')
             
-            send_login_credentails(email,username,password)
-            messages.success(request, "You have successfully registered")
-            return redirect("home")
+                send_login_credentails(email,username,password)
+                messages.success(request, "You have successfully registered")
+                return redirect("home")
+            else:
+                messages.success(request, "Error while register")
+                form = SignUpForm()
+                return render(request, "register.html", {"form": form})
         else:
-            messages.success(request, "Error while register")
+            
             form = SignUpForm()
             
             return render(request, "register.html", {"form": form})
@@ -148,3 +152,5 @@ def publish_article(request,pk):
     current_record.status = "PUBLISHED"
     current_record.save()
     return redirect('home')
+
+

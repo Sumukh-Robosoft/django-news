@@ -1,81 +1,106 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% block content %}
-
-  {% if user.is_authenticated %}
-   {% if user.is_superuser %} 
-   {% if users %} 
-  <div class="continer">
+{% if user.is_authenticated %}
+{%if user.is_superuser %}
+{% if users|length > 1 %}
+<div class="continer">
+  <div
+    style="
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    "
+  >
     <table class="table table-striped">
-        <thead>
-          <tr>
-            
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-             <th scope="col">is_author</th>
-            <th scope="col">is_publisher</th>
-          </tr>
-        </thead>
-        
-        <tbody>
-            {% for user in users %}
-            {% if user.is_superuser %}
-            {% else %}
-          <tr>
-            
-            <td>{{user.username}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.is_author}}</td>
-            <td>{{user.is_publisher}}</td>
-            <td><a href="{% url 'delete_user' user.id %}"><button class="btn btn-danger">Delete</button></a></td>
-          </tr>
-          {% endif %}
-          {% endfor %}
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">is_author</th>
+          <th scope="col">is_publisher</th>
+        </tr>
+      </thead>
 
-        </tbody>
-      </table>
+      <tbody>
+        {% for user in users %}
+        {% if user.is_superuser %}
+        {% else %}
+        <tr>
+          <td>{{user.username}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.is_author}}</td>
+          <td>{{user.is_publisher}}</td>
+          <td>
+            <a href="{% url 'delete_user' user.id %}"
+              ><button class="btn btn-danger">Delete</button></a
+            >
+          </td>
+        </tr>
+        {% endif %} 
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <h1 style="
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  ">No Users</h1>
   </div>
-  
- 
-   {% else %}
-  <h1>No user ............</h1>
-  {% endif %} 
+
+{% endif %} 
+
   {%elif user.is_author%}
   <h1>All Articles</h1>
   {% for article in articles %}
   <div class="card">
     <div class="card-header">
       <h5 class="card-title">{{article.title}}</h5>
-      <img src="../media/{{article.thumbnail}}" alt="Thumbanail" width="500px" height="200px">
-      
+      <img
+        src="../media/{{article.thumbnail}}"
+        alt="Thumbanail"
+        width="500px"
+        height="200px"
+      />
     </div>
     <div class="card-body">
       <h5 class="card-title">{{article.subtitle}}</h5>
-      <p class="card-text">{{article.content}}</p><br>
+      <p class="card-text">{{article.content}}</p>
+      <br />
       <p class="card-text">Author - {{article.author}}</p>
-     </div>
-  </div>  
-<br />
-{% endfor %}
+    </div>
+  </div>
+  <br />
+  {% endfor %} 
   {%elif user.is_publisher%}
   <h1>All Articles</h1>
   {% for article in articles %}
   <div class="card">
     <div class="card-header">
       <h5 class="card-title">{{article.title}}</h5>
-      <img src="../media/{{article.thumbnail}}" alt="Thumbanail" width="500px" height="200px">
-      
+      <img
+        src="../media/{{article.thumbnail}}"
+        alt="Thumbanail"
+        width="500px"
+        height="200px"
+      />
     </div>
     <div class="card-body">
       <h5 class="card-title">{{article.subtitle}}</h5>
-      <p class="card-text">{{article.content}}</p><br>
+      <p class="card-text">{{article.content}}</p>
+      <br />
       <p class="card-text">Author - {{article.author}}</p>
-     </div>
-     <a href = '{%url "article" article.id %}'>Review</a>
+    </div>
+    <a href='{%url "article" article.id %}'>Review</a>
   </div>
-<br>
-{% endfor %}
-  {% endif %} 
-  {% else %}
+  <br />
+  {% endfor %}
+   {% endif %}
+    {% else %}
+</div>
+<div class="container mb-3">
   <h1>Login</h1>
   <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
@@ -100,7 +125,8 @@
     </div>
     <button type="submit" class="btn btn-secondary">Login</button>
   </form>
-  {% endif %}
-
-
-{% endblock %}
+</div>
+  
+  {% endif %} 
+  {% endblock %}
+</div>
