@@ -8,10 +8,7 @@ from .emails import *
 
 def home(request):
     user = User.objects.all()
-    articles = Articles.objects.all()
-    paginator = Paginator(articles, per_page=settings.PAGINATION_PER_PAGE)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    articles = Articles.objects.filter(status="PUBLISHED")
     return render(request, "home.html", {"articles": articles, "users": user})
 
 
@@ -151,6 +148,7 @@ def publish_article(request,pk):
     current_record.publisher = request.user
     current_record.status = "PUBLISHED"
     current_record.save()
+    messages.success(request,"Published successfully")
     return redirect('home')
 
 

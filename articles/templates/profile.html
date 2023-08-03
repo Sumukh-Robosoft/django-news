@@ -1,33 +1,36 @@
-{% extends 'base.html' %}
- {% block content %}
- <div style="position: absolute;
- top: 30%;
- left: 50%;
- transform: translate(-50%, -50%);">
-    
- 
-<h1>User Profile</h1><br>
-<table>
-  <tr>
-    <th>Name:</th>
-    <td>{{ user.username }}</td>
-  </tr>
-  <tr>
-    <th>Email:</th>
-    <td>{{ user.email }}</td>
-  </tr>
-  <tr>
-    <th>Role:</th>
-    {% if user.is_superuser %}
-    <td>Admin</td>
-    {% elif user.is_author %}
-    <td>Author</td>
-    {% elif user.is_publisher %}
-    <td>Publisher</td>
-  </tr>
-  {% endif %}
-</table><br>
+{% extends 'base.html' %} {% block content %}
+<div
+  style="
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  "
+>
+  <h1>User Profile</h1>
+  <br />
+  <table>
+    <tr>
+      <th>Name:</th>
+      <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+      <th>Email:</th>
+      <td>{{ user.email }}</td>
+    </tr>
+    <tr>
+      <th>Role:</th>
+      {% if user.is_superuser %}
+      <td>Admin</td>
+      {% elif user.is_author %}
+      <td>Author</td>
+      {% elif user.is_publisher %}
+      <td>Publisher</td>
+    </tr>
+    {% endif %}
+  </table>
+  <br />
 
-<a href="{% url 'home' %}"><button class="btn btn-secondary">Back</button></a>
+  <a href="{% url 'home' %}"><button class="btn btn-secondary">Back</button></a>
 </div>
 {% endblock %}

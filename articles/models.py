@@ -12,10 +12,8 @@ class Articles(models.Model):
     subtitle = models.CharField(max_length=500)
     content = models.TextField()
     thumbnail = models.ImageField(upload_to='images/', blank=True)
-    author = models.ForeignKey(User, related_name="author", on_delete=models.CASCADE)
-    publisher = models.ForeignKey(
-        User, related_name="publisher", on_delete=models.CASCADE, null=True
-    )
+    author = models.CharField(max_length = 100)
+    publisher = models.CharField(max_length = 100)
     status = models.CharField(max_length=10)
 
 
